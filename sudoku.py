@@ -166,7 +166,7 @@ class SudokuBoard:
 
                     if len(MCV_set) != 0:
                         tmp = MCV_set.pop()
-                        # removes all (row, column) pairs of constrined variables less than new maximum
+                        # removes all (row, column) pairs of constrained variables less than new maximum
                         while (self.get_constrain_num(tmp[0],tmp[1]) < max and len(MCV_set) > 0):
                             tmp = MCV_set.pop()
                         # adds (row, column) pair if it meets the new maximum
@@ -188,7 +188,7 @@ class SudokuBoard:
         LCV_set = sorted(LCV_set, key = itemgetter(1))
         return [i[0] for i in LCV_set]
 
-    # choose contraint heuristics
+    # choose constraint heuristics
     # 0: pick next blank cell
     # 1: MRV
     # 2: MCV
