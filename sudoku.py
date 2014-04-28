@@ -113,7 +113,7 @@ class SudokuBoard:
         return [-1, -1, self.UnAssignedValue[row][col]];
 
 
-    # return most remaining variables
+    # return minimum remaining variables
     def get_MRV_blank(self, row, col, board):
         min = self.BoardSize + 1
         MRV_set = []
@@ -133,7 +133,7 @@ class SudokuBoard:
                     MRV_set.append([i,j])
         return MRV_set
 
-    # return most containing variables
+    # return all most containing variables
     def get_MCV_blank(self, row, col, board):
         max = -1
         MCV_set = []
@@ -224,7 +224,7 @@ class SudokuBoard:
         row_col_val = self.get_next_blank(row, col)
         for i in row_col_val[2]:
             self.consistency_check += 1
-            self.CurrentGameboard[row][col] = i
+            self.CurrentGameboard[row][col] = i 
             if self.back_tracking(row_col_val[0], row_col_val[1]):
                 return True;
         self.CurrentGameboard[row][col] = 0
