@@ -1,0 +1,21 @@
+task allocation
+
+* MCV
+get_MCV_blank  + get_constrain_num(self, row, col)	//Elaine
+* MRV  
+get_MRV_blank 			//Elaine
+
+* LCV  
+get_constrain_value_num() + get_LCV_value() //Yang Zhang 
+* forward_checking  
+forward_checking()			//Yang Zhang
+
+
+* back_tracking 
+back_tracking() + get_next_blank(self, row, col)    // Ran Li
+
+
+* Implement discussed frame  
+update_possible_unassigned()  initialize_possible()get_choice_blank // Zhaoyang
+* testing 
+nine_nine_test    //Zhaoyang

@@ -121,7 +121,6 @@ class SudokuBoard:
                     return [i, j, self.UnAssignedValue[row][col]]
         return [-1, -1, self.UnAssignedValue[row][col]];
 
-
     # return a set of (row, column) pairs of the minimum remaining variables
     def get_MRV_blank(self, row, col, board):
         # initializes the minimum to some arbitrary large number
@@ -261,7 +260,7 @@ class SudokuBoard:
         row_col_val = self.get_next_blank(row, col)
         for i in row_col_val[2]:
             self.consistency_check += 1
-            self.CurrentGameboard[row][col] = i
+            self.CurrentGameboard[row][col] = i 
             if self.back_tracking(row_col_val[0], row_col_val[1]):
                 return True;
 
