@@ -1,8 +1,8 @@
 348 notes
 
-the board : given a size n * n grid, you fill in with numbers in [1,n]. 
+the board : given a size n * n grid (n x n array), you fill in with numbers in [1,n]. 
 
-Variable is any number in [1,n]
+Variable is any cell in the grid that you fill in with numbers in in [1,n]
 
 Constraints: The number could not be repeated in its row, column, or subgrid.
 
