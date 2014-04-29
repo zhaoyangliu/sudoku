@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import struct, string, math
+import pdb
 import copy
+import sys
 from operator import itemgetter
 
 #this will be the game object your player will manipulate
@@ -14,7 +16,7 @@ class SudokuBoard:
         self.all_pair = [ [ i, j] for i in range(size) for j in range(size)]
         self.consistency_check = 0
         self.initialize_possible(board)
-        self.fill_seq = [[]]
+        self.fill_seq = []
 
     #This function will create a new sudoku board object with
     #with the input value placed on the GameBoard row and col are
@@ -262,6 +264,7 @@ class SudokuBoard:
             self.consistency_check += 1
             self.CurrentGameboard[row][col] = i 
             if self.back_tracking(row_col_val[0], row_col_val[1]):
+                self.fill_seq.insert(0, [row, col])
                 return True;
 
         self.CurrentGameboard[row][col] = 0
@@ -356,14 +359,44 @@ def nine_nine_test():
 # nine_nine_test()
 
 # test one heuristic at a time. change the filename to switch test problems.
-file_name = "16x16.sudoku"
-board = init_board(file_name)
-row = board.get_first_zero(0, 0)[0]
-col = board.get_first_zero(0, 0)[1]
-board.forward_checking(row, col, 3)
-# board.back_tracking(row, col)
 
-print board.CurrentGameboard
-print "is complete: " + str(iscomplete(board.CurrentGameboard))
-print "consistency check: " + str(board.consistency_check)
-print board.fill_seq
+def main():
+
+    if len(sys.argv) not in [3,4]:
+        print("Wrong number of arguments")
+        return
+
+    try:
+        file_name = sys.argv[1]
+        board = init_board(file_name)
+        row = board.get_first_zero(0, 0)[0]
+        col = board.get_first_zero(0, 0)[1]
+        
+        if sys.argv[2] == 'b':
+            if len(sys.argv) != 3:
+                print("Wrong number of arguments")
+                return
+            board.back_tracking(row, col)
+        
+        elif sys.argv[2] == 'f':
+            if len(sys.argv) == 4 and int(sys.argv[3]) in range(6):
+                board.forward_checking(row, col, int(sys.argv[3]))
+            else:
+                print("Please choose from 0 - 5")
+                return
+        else :
+            print "Wrong command: " + " ".join(sys.argv)
+            return
+
+        print board.CurrentGameboard
+        print "is complete: " + str(iscomplete(board.CurrentGameboard))
+        print "consistency check: " + str(board.consistency_check)
+        print "Choosing sequence: "
+        print board.fill_seq
+    except IOError as e:
+        print("No input file!")
+
+    return
+
+if __name__ == '__main__':
+    main()
